@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from '../api/axios';
 import MovieModal from './MovieModal/MovieModal';
 import './Row.css';
+import MovieResults from '../api/responseMovie'
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -13,11 +14,19 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-export default function Row({ title, id, fetchURL,isLargeRow}) {
+
+interface Props {
+	title: string;
+	id: string;
+	fetchURL: string;
+	isLargeRow?: boolean;
+}
+
+export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 	
-	let [movies, setMovies] = useState([]);
-	let [modalOpen, setModalOpen] = useState(false);
-	let [movieSelected, setMovieSelected] = useState({});
+	let [movies, setMovies] = useState<Array<MovieResults>>([]);
+	let [modalOpen, setModalOpen] = useState<boolean>(false);
+	let [movieSelected, setMovieSelected] = useState<MovieResults | null>(null);
 
 	useEffect(() => {
 		fetchMovieData();
@@ -26,9 +35,10 @@ export default function Row({ title, id, fetchURL,isLargeRow}) {
 	const fetchMovieData = async () => { 
 		const request = await axios.get(fetchURL);
 		setMovies(request.data.results);
+		console.log(request.data.results)
 	}
 
-	const movieClickHandler = (movie) => {
+	const movieClickHandler = (movie: MovieResults) => {
 		setModalOpen(true);
 		setMovieSelected(movie);
 	}
@@ -63,9 +73,10 @@ export default function Row({ title, id, fetchURL,isLargeRow}) {
 					<span className='arrow' >{ "<"}</span>
 				</div> */}
 				
-				<div id={ id} className='row_posters'>
+				<div id={id} className='row_posters'>
 					{
-						movies.map((movie) => {
+						movies.map((movie: MovieResults) => {
+							// console.log(movie)
 							console.log("back:  ",movie.backdrop_path);
 							console.log("poster:  ",movie.poster_path); 
 							if ( movie.backdrop_path && movie.poster_path ) {
@@ -75,7 +86,7 @@ export default function Row({ title, id, fetchURL,isLargeRow}) {
 										className={`row_poster ${isLargeRow && "row_poster-large"}`}
 										src={`https://image.tmdb.org/t/p/original
 										${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
-										alt={movie.name}
+										alt={movie.title}
 										onClick={() => { movieClickHandler(movie) }} />
 								</SwiperSlide>
 								)
@@ -98,7 +109,7 @@ export default function Row({ title, id, fetchURL,isLargeRow}) {
 
 			{
 				//cf. props로 전송할때 {...movieSelected}와 같이 스프레드 연산자를 이용해서도 전달 가능
-				modalOpen && <MovieModal movieSelected={movieSelected } setModalOpen={setModalOpen} />
+				modalOpen && <MovieModal movieSelected={movieSelected as MovieResults} setModalOpen={setModalOpen} />
 			}
 		</section>
 	)

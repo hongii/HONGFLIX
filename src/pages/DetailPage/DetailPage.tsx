@@ -4,7 +4,7 @@ import axios from '../../api/axios';
 
 export default function DetailPage() {
 	let { movieId } = useParams();
-	let [movie, setMovie] = useState({});
+	let [movie, setMovie] = useState<any>({});
 	
 	useEffect(() => {
 		fetchData();

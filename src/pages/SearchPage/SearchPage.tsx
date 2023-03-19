@@ -5,7 +5,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import './SearchPage.css';
 
 export default function SearchPage() {
-	const [searchResults, setSearchResults] = useState([]);
+	const [searchResults, setSearchResults] = useState<any>([]);
 	const useQuery = () => {/* useLocation() 객체 정보 중 search부분의 정보를 가져온다. => search : "?q=아이언맨"*/
 		const decodeURL = decodeURI(useLocation().search);//한글 깨짐 방지
 		return new URLSearchParams(decodeURL);
@@ -22,7 +22,7 @@ export default function SearchPage() {
 		}
 	}, [debouncedSearchTerm])
 
-	const fetchSearchMovie = async (debouncedSearchTerm) => {
+	const fetchSearchMovie = async (debouncedSearchTerm: any) => {
 		console.log(debouncedSearchTerm);
 		try {
 			const request = await axios.get(`/search/multi?include_adult=false&query=${debouncedSearchTerm}`);
@@ -38,7 +38,7 @@ export default function SearchPage() {
 		if (searchResults.length > 0) {
 			return (
 				<section className='search-container'>
-					{searchResults.map((movie) => {
+					{searchResults.map((movie: any) => {
 						if (movie.backdrop_path !== null && movie.media_type !== "person") {
 							const movieImageURL = "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
 							return (

@@ -4,9 +4,8 @@ import { FaSearch } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
-
-	let [navBlackShow, setShow] = useState(false);//nav바의 배경색을 black으로(#111) 보이게 할지 말지 상태를 저장하는 state변수
-	let [searchValue, setSearchValue] = useState("");
+	let [navBlackShow, setShow] = useState<boolean>(false);//nav바의 배경색을 black으로(#111) 보이게 할지 말지 상태를 저장하는 state변수
+	let [searchValue, setSearchValue] = useState<string>("");
 	// let [isClickSearch, setClickSearch] = useState(false);
 	let navigate = useNavigate();
 
@@ -27,7 +26,7 @@ export default function Nav() {
 		}
 	});
 
-	const changeHandler = (e) => {
+	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
 		navigate(`/search?q=${e.target.value}`);
 	}
