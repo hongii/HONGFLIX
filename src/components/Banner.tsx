@@ -5,7 +5,8 @@ import axios from '../api/axios';
 import './Banner.css';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import MovieResults from '../api/responseMovie';
+import { TbAlertCircle } from 'react-icons/tb'
+import { MovieResults } from '../api/responseMovie';
 
 const Banner: React.FC = () => {
 	let [movie, setMovie] = useState<MovieResults | null>(null);
@@ -72,15 +73,20 @@ const Banner: React.FC = () => {
 					<BackBtn className='video_exit'
 						onClick={() => {setPlayClicked(false)}}
 					>↩</BackBtn>
-					<Iframe
-						width="640" height="360"
-						// 아래의 오류는 추후 비디오 없는 경우에는 다른 컴포넌트가 보이도록 수정할 예정 -> movie.vedio 가 없는경우와 있는경우를 조건문으로 판단할 예정
-						src={`https://www.youtube.com/embed/${movie?.videos?.results[0].key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movie?.videos?.results[0].key}`}
-						title="YouTube video player"
-						frameBorder="0"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-						allowFullScreen>	
-					</Iframe>
+
+					{
+						movie?.videos?.results.length == 0
+						? <NoVideo className='no-video'><TbAlertCircle style={{color:"#666",paddingRight:"10px"}}/> No Videos Found.</NoVideo>
+						: <Iframe
+							width="640" height="360"
+							src={`https://www.youtube.com/embed/${movie?.videos?.results[0].key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movie?.videos?.results[0].key}`}
+							title="YouTube video player"
+							frameBorder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+							allowFullScreen>	
+						</Iframe>
+						
+					}
 				</HomeContainer>
 			</Container>
 		)
@@ -133,4 +139,14 @@ const Iframe = styled.iframe`
 		width:100%;
 		height:100%;
 	}
+`
+
+const NoVideo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  width: 100%;
+  height: 100%;
+  color:#666;
 `

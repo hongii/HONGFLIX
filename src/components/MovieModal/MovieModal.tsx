@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import './MovieModal.css';
-import MovieResults from '../../api/responseMovie'
+import type { MovieResults } from '../../api/responseMovie';
 
 interface Props {
 	movieSelected: MovieResults;
@@ -38,7 +38,7 @@ export default function MovieModal({movieSelected, setModalOpen }: Props) {
 								{	movieSelected.release_date
 									? movieSelected.release_date
 									: movieSelected.first_air_date}</span>
-							<h2 className='modal_title'>{movieSelected.title ? movieSelected.title : movieSelected.title}</h2>
+							<h2 className='modal_title'>{movieSelected.title ? movieSelected.title : movieSelected.name}</h2>
 							<p className='modal_overview'>평점 : {movieSelected.vote_average}</p>
 							<p className='modal_overview'>{movieSelected.overview }</p>
 						</p>

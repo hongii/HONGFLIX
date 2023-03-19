@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from '../api/axios';
 import MovieModal from './MovieModal/MovieModal';
 import './Row.css';
-import MovieResults from '../api/responseMovie'
+import type { MovieResults } from '../api/responseMovie';
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -35,7 +35,7 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 	const fetchMovieData = async () => { 
 		const request = await axios.get(fetchURL);
 		setMovies(request.data.results);
-		console.log(request.data.results)
+		// console.log(request.data.results)
 	}
 
 	const movieClickHandler = (movie: MovieResults) => {
@@ -77,8 +77,8 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 					{
 						movies.map((movie: MovieResults) => {
 							// console.log(movie)
-							console.log("back:  ",movie.backdrop_path);
-							console.log("poster:  ",movie.poster_path); 
+							// console.log("back:  ",movie.backdrop_path);
+							// console.log("poster:  ",movie.poster_path); 
 							if ( movie.backdrop_path && movie.poster_path ) {
 								return (
 								<SwiperSlide key={movie.id} className='my_swiper'>
@@ -87,7 +87,7 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 										src={`https://image.tmdb.org/t/p/original
 										${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
 										alt={movie.title}
-										onClick={() => { movieClickHandler(movie) }} />
+										onClick={() => { movieClickHandler(movie as MovieResults) }} />
 								</SwiperSlide>
 								)
 						}
