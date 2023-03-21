@@ -62,20 +62,10 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 					630: { slidesPerView: 4, slidesPerGroup: 4 },
 					0:{ slidesPerView: 3, slidesPerGroup: 3 },
 			}}>
-			
-			{/* swiper기능 없는 슬라이드 버튼 구현
-			<div className='row__slider'>
-				<div className="slider__arrow--left" onClick={() => {
-					//Row component의 id(props로 전송받은)를 이용하여 해당 Row(container)의 스크롤을 이동시킨다.
-					document.getElementById(id).scrollLeft -= window.innerWidth - 80;
-				}}>
-					<span className='slider__arrowIcon' >{ "<"}</span>
-				</div> */}
 				
 				<div id={id} className='row__posters'>
 					{
 						movies.map((movie: MovieResults) => {
-							// console.log(movie)
 							// console.log("back:  ",movie.backdrop_path);
 							// console.log("poster:  ",movie.poster_path); 
 							if ( movie.backdrop_path && movie.poster_path ) {
@@ -97,15 +87,6 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 					}
 				</div>
 			</Swiper>
-			
-				{/* <div className="slider__arrow--right" onClick={() => {
-					//Row 컴포넌트의 innerWidth만큼 스크롤을 이동시킨다.
-					document.getElementById(id).scrollLeft += window.innerWidth - 80;
-				}}>
-					<span className='slider__arrowIcon'>{ ">"}</span>
-				</div>
-			</div> */}
-
 			{
 				//cf. props로 전송할때 {...movieSelected}와 같이 스프레드 연산자를 이용해서도 전달 가능
 				modalOpen && <MovieModal movieSelected={movieSelected as MovieResults} setModalOpen={setModalOpen} />

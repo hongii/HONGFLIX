@@ -14,44 +14,6 @@
 	position: relative;
 }
 
-.slider__arrow--left {
-	background-clip: content-box;
-	padding: 20px 0;
-	box-sizing: border-box;
-	transition: 400ms all ease-in-out;
-	cursor: pointer;
-	width: 80px;
-	z-index: 1000;
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	visibility: hidden;
-	
-	/* span tag("<"표시)를 slider_arrow-left (div tag)의 가운데에 두기 위해 */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.slider__arrow--right {
-	padding: 20px 0;
-	background-clip: content-box;
-	box-sizing: border-box;
-	transition: 400ms all ease-in-out;
-	cursor: pointer;
-	width: 80px;
-	z-index: 1000;
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	visibility: hidden;
-}
-
 .slider__arrowIcon {
 	transition: 400ms all ease-in-out;
 	font-size:2rem;
@@ -70,16 +32,6 @@
 .row__slider:hover .slider__arrow--right {
 	transition: 400ms all ease-in-out;
 	visibility: visible;
-}
-
-.slider__arrow--left:hover {
-	background: rgba(20, 20, 20, 0.5);
-	transition: 400ms all ease-in-out;
-}
-
-.slider__arrow--right:hover {
-	background: rgba(20, 20, 20, 0.5);
-	transition: 400ms all ease-in-out;
 }
 
 .row__posters {
@@ -116,28 +68,6 @@
 .row__poster--large:hover {
 	transform: scale(1.1);
 	opacity: 1;
-}
-
-.row__arrow--left {
-	position: absolute;
-	top: 0;
-	left: 20px;
-	height: 100%;
-	width: 32px;
-	background: rgba(0, 0, 0, 0.2);
-	display: flex;
-	align-items: center;
-}
-
-.row__arrow--right {
-	position: absolute;
-	top: 0;
-	right: 0px;
-	height: 100%;
-	width: 32px;
-	background: rgba(0, 0, 0, 0.2);
-	display: flex;
-	align-items: center;
 }
 
 @media screen and (min-width: 1200px) {
