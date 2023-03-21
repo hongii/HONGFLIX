@@ -6,7 +6,7 @@ import './Banner.css';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { TbAlertCircle } from 'react-icons/tb'
-import { MovieResults } from '../api/responseMovie';
+import type { MovieResults } from '../api/responseMovie';
 
 const Banner: React.FC = () => {
 	let [movie, setMovie] = useState<MovieResults | null>(null);

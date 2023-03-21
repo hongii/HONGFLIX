@@ -32,24 +32,24 @@ export default function Nav() {
 	}
 
 	return (
-		<nav className={`nav ${navBlackShow && "nav_black"}`}>
+		<nav className={`nav ${navBlackShow && "nav--black"}`}>
 			<div
 				style={{backgroundImage:"url('https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg')"}}
-				className="nav_logo"
+				className="nav__logo"
 				onClick={() => {navigate("/") }}
 			/>
 			
-			<div className='secondary-nav'>
-				<div className='searchForm'>
-					<input type='text' className='nav_search-input' value={searchValue}
+			<div className='navSecondary'>
+				<div className='navSecondary__searchForm'>
+					<input type='text' className='navSecondary__searchForm--input' value={searchValue}
 						onChange={changeHandler} placeholder="영화를 검색하세요." /> 
-					<button className='nav_search-btn' ><FaSearch/></button>			
+					<button className='navSecondary__searchForm--btn' ><FaSearch/></button>			
 				</div>
 				
 				<img
 				alt="User profile"
 				src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117"
-				className='nav_profileIcon'
+				className='nav__profileIconImg'
 				/>
 			</div>
 			

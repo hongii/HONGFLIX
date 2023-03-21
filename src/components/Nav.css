@@ -9,10 +9,10 @@
 	transition-timing-function: ease-in;
 	align-items: center;
 }
-.nav_black{
+.nav--black{
 	background-color: #111;
 }
-.nav_logo{
+.nav__logo{
 	width: 120px;
 	height: 100%;
 	cursor: pointer;
@@ -23,31 +23,31 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 }
-.secondary-nav{
+.navSecondary{
 	display: flex;
 	margin-right: 4rem;
 	align-items: center;
 }
-.nav_profileIcon{
+.nav__profileIconImg{
 	width: 45px;
 	height: 45px;
 	border-radius: 8px;
 	cursor: pointer;
 }
-.searchForm{
+.navSecondary__searchForm{
 	display: flex;
 	margin-right: 1vw;
 	width: 30vw;
 	min-width: 320px;
 }
-.nav_search-input{
+.navSecondary__searchForm--input{
 	flex: 1 1 auto;
 	border-radius: 5px;
 	font-size: 1.2rem;
 	color: #fff;
 	background-color: rgba(0, 0, 0, 0.5);
 }
-.nav_search-btn{
+.navSecondary__searchForm--btn{
 	color:#fff;
 	opacity: 0.8;
 	font-size: 1.5rem;
