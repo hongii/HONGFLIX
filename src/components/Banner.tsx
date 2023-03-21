@@ -33,7 +33,6 @@ const Banner: React.FC = () => {
 		const { data: movieDetail,...metaData } = await axios.get(`/movie/${movieId}`, {
 			params: { append_to_response: "videos" }
 		});
-		//ex) https://api.themoviedb.org/3/movie/777831?api_key=0eb2ac4ec8131028e4758644d8effa87&language=ko-KR&append_to_response=videos
 		
 		console.log(movieDetail);
 		// console.log(metaData);
@@ -45,38 +44,36 @@ const Banner: React.FC = () => {
 		return (
 			<header className='banner' 
 			style={{backgroundImage:`url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`}}>
-				<div className='banner_contents'>
-					<h1 className='banner_title'>{movie?.title || movie?.name || movie?.original_title}</h1>
+				<div className='banner__contents'>
+					<h1 className='banner__title'>{movie?.title || movie?.name || movie?.original_title}</h1>
 					
-					<div className='banner_buttons'>
-						<button className='banner_button play' onClick={()=>{setPlayClicked(true)}}>
+					<div className='banner__buttons'>
+						<button className='banner__button play' onClick={()=>{setPlayClicked(true)}}>
 							<div style={{ marginRight: "10px" }}>▶</div>
 							<div>재생</div>
 						</button>
-						<button className='banner_button info'>
+						<button className='banner__button info'>
 							<div style={{ marginRight: "10px" }}>ⓘ</div>
 							<div>상세정보</div>
 						</button>
 					</div>
 					
-					<h1 className='banner_description'>{ movie?.overview}</h1>
+					<h1 className='banner__description'>{ movie?.overview}</h1>
 				</div>
-				<div className='banner_fadeBottom'></div>
+				<div className='banner__fadeBottom'></div>
 			</header>
 		)
 	}
 	
 	else {
+		// styled-components 적용
 		return (
 			<Container>
 				<HomeContainer>
-					<BackBtn className='video_exit'
-						onClick={() => {setPlayClicked(false)}}
-					>↩</BackBtn>
-
+					<BackBtn onClick={() => {setPlayClicked(false)}}>↩</BackBtn>
 					{
 						movie?.videos?.results.length == 0
-						? <NoVideo className='no-video'><TbAlertCircle style={{color:"#666",paddingRight:"10px"}}/> No Videos Found.</NoVideo>
+						? <NoVideo><TbAlertCircle style={{color:"#666",paddingRight:"10px"}}/> No Videos Found.</NoVideo>
 						: <Iframe
 							width="640" height="360"
 							src={`https://www.youtube.com/embed/${movie?.videos?.results[0].key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movie?.videos?.results[0].key}`}

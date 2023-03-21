@@ -10,21 +10,21 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 }
-.banner_contents {
+.banner__contents {
 	display: flex;
 	flex-direction: column;
 	padding-top: 140px;
 	width: 40%;
 }
-.banner_title{
+.banner__title{
 	font-size: calc(2rem + 0.6vw);
 	margin-bottom: 1rem;
 }
-.banner_buttons{
+.banner__buttons{
 	display: flex;
 	margin-bottom: 2.5rem;
 }
-.banner_button{
+.banner__button{
 	display: flex;
 	border:none;
 	font-size: calc(0.7rem + 0.6vw);
@@ -52,7 +52,7 @@
 	color: white;
 }
 
-.banner_description{
+.banner__description{
 	font-size: calc(0.65rem + 0.6vw);
 	line-height: normal;
 	opacity: 0.8;
@@ -67,7 +67,7 @@
 	
 }
 
-.banner_fadeBottom {
+.banner__fadeBottom {
 	flex-grow: 1;
 	background-image: linear-gradient(180deg,
 			transparent,
@@ -82,7 +82,7 @@
 		padding-bottom: 40%; */
 		height: 40vmax;
 	}
-	.banner_description{
+	.banner__description{
 		-webkit-line-clamp: 6;
 	}
 
