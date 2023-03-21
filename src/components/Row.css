@@ -14,16 +14,6 @@
 	position: relative;
 }
 
-.slider__arrowIcon {
-	transition: 400ms all ease-in-out;
-	font-size:2rem;
-}
-
-.slider__arrowIcon:hover {
-	transition: 400ms all ease-in-out;
-	transform: scale(1.5);
-}
-
 .row__slider:hover .slider__arrow--left {
 	transition: 400ms all ease-in-out;
 	visibility: visible;
