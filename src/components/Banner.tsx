@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
-//import { useHistory } from 'react-route-dom';
 import requests from '../api/requests';
 import axios from '../api/axios';
 import './Banner.css';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import * as S from './BannerStyle';
 import { TbAlertCircle } from 'react-icons/tb'
 import type { MovieResults } from '../api/responseMovie';
 
 const Banner: React.FC = () => {
 	let [movie, setMovie] = useState<MovieResults | null>(null);
 	let [isPlayClicked, setPlayClicked] = useState<boolean>(false);
-	let navigate = useNavigate();
 	
 	useEffect(() => {
 		fetchData();
@@ -42,6 +39,7 @@ const Banner: React.FC = () => {
 	/* 재생 버튼을 누르지 않았을때 보이는 컴포넌트 */
 	if (!isPlayClicked) {
 		return (
+			//css BEM 적용
 			<header className='banner' 
 			style={{backgroundImage:`url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`}}>
 				<div className='banner__contents'>
@@ -68,82 +66,25 @@ const Banner: React.FC = () => {
 	else {
 		// styled-components 적용
 		return (
-			<Container>
-				<HomeContainer>
-					<BackBtn onClick={() => {setPlayClicked(false)}}>↩</BackBtn>
+			<S.Container>
+				<S.HomeContainer>
+					<S.BackBtn onClick={() => {setPlayClicked(false)}}>↩</S.BackBtn>
 					{
 						movie?.videos?.results.length == 0
-						? <NoVideo><TbAlertCircle style={{color:"#666",paddingRight:"10px"}}/> No Videos Found.</NoVideo>
-						: <Iframe
+						? <S.NoVideo><TbAlertCircle style={{color:"#666",paddingRight:"10px"}}/> No Videos Found.</S.NoVideo>
+						: <S.Iframe
 							width="640" height="360"
 							src={`https://www.youtube.com/embed/${movie?.videos?.results[0].key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movie?.videos?.results[0].key}`}
 							title="YouTube video player"
 							frameBorder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 							allowFullScreen>	
-						</Iframe>
+						</S.Iframe>
 						
 					}
-				</HomeContainer>
-			</Container>
+				</S.HomeContainer>
+			</S.Container>
 		)
 	}
 }
 export default Banner;
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height:100vh;
-	width:100%;
-	overflow-y:hidden;
-`
-
-const HomeContainer = styled.div`
-	width: 100%;
-	height: 100%;
-`
-const BackBtn = styled.button`
-	display: inline-block;
-	position: absolute;
-	top:1.5rem;
-	left:0.5rem;
-	padding:0 0.5rem 0.5rem 0.5rem;
-	teat-align:center;
-	border-radius:50%;
-	background-color:rgba(74,74,74,1);
-	whidth:43px;
-	height:43px;
-	color:white;
-	text-opacity:0.8;
-	z-index:1000;
-	font-size:2.3rem;
-	font-weight:bold;
-`
-const Iframe = styled.iframe`
-	width: 100%;
-	height: 100%;
-	z-index:-1;
-	border:none;
-
-	&::after{
-		content:"";
-		position: absolute;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-	}
-`
-
-const NoVideo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
-  width: 100%;
-  height: 100%;
-  color:#666;
-`
