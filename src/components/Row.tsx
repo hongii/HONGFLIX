@@ -5,7 +5,7 @@ import './Row.css';
 import type { MovieResults } from '../api/responseMovie';
 
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -44,11 +44,10 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 	}
 	return (
 		<section className='row'>
-			<h2 className='subTitle'>{title}</h2>
+			<h2 className='row__subTitle'>{title}</h2>
 			
 			<Swiper
-				// install Swiper modules
-				modules={[Navigation, Pagination, Scrollbar, A11y]}//Navigation : 양 옆 arrow버튼을 사용할지 말지,
+				modules={[Navigation, Pagination, Scrollbar]}//Navigation : 양 옆 arrow버튼을 사용할지 말지,
 																														// Pagination : 슬라이드 이동할때 스크롤 위치를 표시할지 말지
 				loop={true}//슬라이드 끝까지 도달한 경우, 다시 맨처음 요소를 보일지 말지
 				spaceBetween={0} // <SwiperSlide> 아이템 사이의 간격
@@ -65,15 +64,15 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 			}}>
 			
 			{/* swiper기능 없는 슬라이드 버튼 구현
-			<div className='slider'>
-				<div className="slider_arrow-left" onClick={() => {
+			<div className='row__slider'>
+				<div className="slider__arrow--left" onClick={() => {
 					//Row component의 id(props로 전송받은)를 이용하여 해당 Row(container)의 스크롤을 이동시킨다.
 					document.getElementById(id).scrollLeft -= window.innerWidth - 80;
 				}}>
-					<span className='arrow' >{ "<"}</span>
+					<span className='slider__arrowIcon' >{ "<"}</span>
 				</div> */}
 				
-				<div id={id} className='row_posters'>
+				<div id={id} className='row__posters'>
 					{
 						movies.map((movie: MovieResults) => {
 							// console.log(movie)
@@ -81,9 +80,9 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 							// console.log("poster:  ",movie.poster_path); 
 							if ( movie.backdrop_path && movie.poster_path ) {
 								return (
-								<SwiperSlide key={movie.id} className='my_swiper'>
+								<SwiperSlide key={movie.id} className='row__mySwiper'>
 									<img
-										className={`row_poster ${isLargeRow && "row_poster-large"}`}
+										className={`row__poster ${isLargeRow && "row__poster--large"}`}
 										src={`https://image.tmdb.org/t/p/original
 										${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
 										alt={movie.title}
@@ -99,11 +98,11 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 				</div>
 			</Swiper>
 			
-				{/* <div className="slider_arrow-right" onClick={() => {
+				{/* <div className="slider__arrow--right" onClick={() => {
 					//Row 컴포넌트의 innerWidth만큼 스크롤을 이동시킨다.
 					document.getElementById(id).scrollLeft += window.innerWidth - 80;
 				}}>
-					<span className='arrow'>{ ">"}</span>
+					<span className='slider__arrowIcon'>{ ">"}</span>
 				</div>
 			</div> */}
 

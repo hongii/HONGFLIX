@@ -4,17 +4,17 @@
 	color: white;
 }
 
-.subTitle{
+.row__subTitle{
 	padding-left: 10px;
 	/* padding: 10px 10px 10px 20px; */
 	/* font-size: 1.8rem; */
 }
 
-.slider {
+.row__slider {
 	position: relative;
 }
 
-.slider_arrow-left {
+.slider__arrow--left {
 	background-clip: content-box;
 	padding: 20px 0;
 	box-sizing: border-box;
@@ -34,7 +34,7 @@
 	justify-content: center;
 }
 
-.slider_arrow-right {
+.slider__arrow--right {
 	padding: 20px 0;
 	background-clip: content-box;
 	box-sizing: border-box;
@@ -52,37 +52,37 @@
 	visibility: hidden;
 }
 
-.arrow {
+.slider__arrowIcon {
 	transition: 400ms all ease-in-out;
 	font-size:2rem;
 }
 
-.arrow:hover {
+.slider__arrowIcon:hover {
 	transition: 400ms all ease-in-out;
 	transform: scale(1.5);
 }
 
-.slider:hover .slider_arrow-left {
+.row__slider:hover .slider__arrow--left {
 	transition: 400ms all ease-in-out;
 	visibility: visible;
 }
 
-.slider:hover .slider_arrow-right {
+.row__slider:hover .slider__arrow--right {
 	transition: 400ms all ease-in-out;
 	visibility: visible;
 }
 
-.slider_arrow-left:hover {
+.slider__arrow--left:hover {
 	background: rgba(20, 20, 20, 0.5);
 	transition: 400ms all ease-in-out;
 }
 
-.slider_arrow-right:hover {
+.slider__arrow--right:hover {
 	background: rgba(20, 20, 20, 0.5);
 	transition: 400ms all ease-in-out;
 }
 
-.row_posters {
+.row__posters {
 	display: flex;
 	overflow-y: hidden;
 	overflow-x: scroll;
@@ -90,13 +90,13 @@
 	scroll-behavior: smooth;
 }
 
-.row_posters::-webkit-scrollbar {
+.row__posters::-webkit-scrollbar {
 	/* 가로 스크를 모양을 가린다 
 	=> 양쪽 slider_arrow 버튼으로 스크롤을 동작시키기 위해(커스텀 스크롤) */
 	display: none;
 }
 
-.row_poster {
+.row__poster {
 	object-fit: cover;
 	width: 100%;
 	max-height: 144px;
@@ -105,20 +105,20 @@
 	border-radius: 8px;
 }
 
-.row_poster:hover {
+.row__poster:hover {
 	transform: scale(1.1);
 }
 
-.row_poster-large {
+.row__poster--large {
 	max-height: 320px;
 }
 
-.row_poster-large:hover {
+.row__poster--large:hover {
 	transform: scale(1.1);
 	opacity: 1;
 }
 
-.row_arrow-left {
+.row__arrow--left {
 	position: absolute;
 	top: 0;
 	left: 20px;
@@ -129,7 +129,7 @@
 	align-items: center;
 }
 
-.row_arrow-right {
+.row__arrow--right {
 	position: absolute;
 	top: 0;
 	right: 0px;
@@ -141,28 +141,30 @@
 }
 
 @media screen and (min-width: 1200px) {
-	.row_poster {
+	.row__poster {
 		max-height: 160px;
 	}
 
-	.row_poster-large {
+	.row__poster--large {
 		max-height: 360px;
 	}
 }
 
 @media screen and (max-width: 768px) {
-	.row_poster {
+	.row__poster {
 		max-height: 100px;
 	}
 
-	.row_poster-large {
+	.row__poster--large {
 		max-height: 280px;
 	}
 }
-.my_swiper{
+.row__mySwiper{
 	padding:1.2rem 0.5rem;
 	z-index: 2;
 }
+
+/* Swiper 모듈 자체 className을 사용해서 custom css적용 */
 .swiper-pagination {
 	/* !important는 덮어쓰기할때 사용 */
 	text-align: right !important;
