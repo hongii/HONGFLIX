@@ -9,9 +9,11 @@
 	transition-timing-function: ease-in;
 	align-items: center;
 }
+
 .nav--black{
 	background-color: #111;
 }
+
 .nav__logo{
 	width: 120px;
 	height: 100%;
@@ -23,32 +25,63 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 }
+
 .navSecondary{
 	display: flex;
 	margin-right: 4rem;
 	align-items: center;
+	justify-content: center;
 }
+
 .nav__profileIconImg{
 	width: 45px;
 	height: 45px;
 	border-radius: 8px;
 	cursor: pointer;
 }
+
 .navSecondary__searchForm{
 	display: flex;
+	position: relative;
 	margin-right: 1vw;
-	width: 30vw;
-	min-width: 320px;
+	min-width: 300px;
 }
+
 .navSecondary__searchForm--input{
 	flex: 1 1 auto;
-	border-radius: 5px;
-	font-size: 1.2rem;
+	width: 0%;
+	opacity: 0;
+	font-size: 1rem;
 	color: #fff;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.8);
+	border: solid 1.5px rgba(255, 255, 255, 0.8);
+	padding: 10px 14px 10px 40px;
+	transition: ease width 0.8s, ease opacity 0.8s;
 }
-.navSecondary__searchForm--btn{
+
+.navSecondary__searchForm--icon {
+  position: absolute; 
+  top: 7px; 
+  color: white;
+  z-index: 1000;
+  cursor: pointer;
+  right: 12px;
+  transition: ease transform 0.8s;
+  transition-delay: 40ms;
+}
+
+.navSecondary__searchForm--icon{
 	color:#fff;
 	opacity: 0.8;
 	font-size: 1.5rem;
 }
+
+.active__icon {
+  transform: translateX(-250px);
+}
+
+.active__input {
+  opacity: 1;
+  width: 100%;
+}
+

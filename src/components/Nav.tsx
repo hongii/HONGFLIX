@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useRef} from 'react'
 import "./Nav.css";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
@@ -6,15 +6,16 @@ import { useNavigate } from 'react-router-dom';
 export default function Nav() {
 	let [navBlackShow, setShow] = useState<boolean>(false);//nav바의 배경색을 black으로(#111) 보이게 할지 말지 상태를 저장하는 state변수
 	let [searchValue, setSearchValue] = useState<string>("");
-	// let [isClickSearch, setClickSearch] = useState(false);
+	let [isClickSearch, setClickSearch] = useState<boolean>(false);
 	let navigate = useNavigate();
+	const searchRef = useRef<HTMLInputElement>(null);
 
-	/* 이벤트 리스너 등록 */
+	/* scroll 이벤트 리스너 등록 */
 	useEffect(() => {
 		window.addEventListener("scroll", (navScrollHandler))
 
 		function navScrollHandler() {
-			if (window.scrollY > 50) {//scroll을 내리면 nav바의 배경색을 #111으로 보이도록
+			if (window.scrollY > 50) {//scroll을 내리면 nav바의 배경색이 #111으로 보이도록
 				setShow(true);
 			}
 			else {
@@ -31,6 +32,11 @@ export default function Nav() {
 		navigate(`/search?q=${e.target.value}`);
 	}
 
+	const clickHandler = () => {
+		setClickSearch(!isClickSearch)
+		searchRef.current!.focus();
+	}
+
 	return (
 		<nav className={`nav ${navBlackShow && "nav--black"}`}>
 			<div
@@ -40,10 +46,10 @@ export default function Nav() {
 			/>
 			
 			<div className='navSecondary'>
-				<div className='navSecondary__searchForm'>
-					<input type='text' className='navSecondary__searchForm--input' value={searchValue}
-						onChange={changeHandler} placeholder="영화를 검색하세요." /> 
-					<button className='navSecondary__searchForm--btn' ><FaSearch/></button>			
+				<div className="navSecondary__searchForm">
+					<button className={`navSecondary__searchForm--icon ${ isClickSearch && "active__icon"}`} onClick={clickHandler}><FaSearch/></button>			
+					<input type='text' className={`navSecondary__searchForm--input ${ isClickSearch && "active__input"}`} value={searchValue}
+						onChange={changeHandler} placeholder="영화를 검색하세요." ref={searchRef}/> 
 				</div>
 				
 				<img
