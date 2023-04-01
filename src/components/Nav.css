@@ -76,11 +76,11 @@
 	font-size: 1.5rem;
 }
 
-.active__icon {
+.icon--active {
   transform: translateX(-250px);
 }
 
-.active__input {
+.input--active{
   opacity: 1;
   width: 100%;
 }

@@ -47,8 +47,8 @@ export default function Nav() {
 			
 			<div className='navSecondary'>
 				<div className="navSecondary__searchForm">
-					<button className={`navSecondary__searchForm--icon ${ isClickSearch && "active__icon"}`} onClick={clickHandler}><FaSearch/></button>			
-					<input type='text' className={`navSecondary__searchForm--input ${ isClickSearch && "active__input"}`} value={searchValue}
+					<button className={`navSecondary__searchForm--icon ${ isClickSearch && "icon--active"}`} onClick={clickHandler}><FaSearch/></button>			
+					<input type='text' className={`navSecondary__searchForm--input ${ isClickSearch && "input--active"}`} value={searchValue}
 						onChange={changeHandler} placeholder="영화를 검색하세요." ref={searchRef}/> 
 				</div>
 				
