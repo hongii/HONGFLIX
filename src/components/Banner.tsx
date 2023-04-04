@@ -23,7 +23,7 @@ const Banner: React.FC = () => {
 		const request = await axios.get(requests.fetchNowPlaying);//비동기 처리
 
 
-		//가져온 여러개의 영화들 중 하나의 영화 id를 랜덤으로 가져오기
+		//가져온 여러개의 영화들 중 하나의 영화 id를 랜덤으로 가져오기 (0 ~ length-1 까지의 랜덤숫자를 가져옴)
 		const movieId = request.data.results[Math.floor(Math.random() * request.data.results.length)].id;
 
 		//랜덤으로 가져온 영화의 세부정보를 가져오기(video 정보도 포함시키기) => get요청으로 가져온 정보 중 data 정보를 movieDetail 변수에 넣는다.
@@ -74,11 +74,9 @@ const Banner: React.FC = () => {
 						? <S.NoVideo><TbAlertCircle style={{color:"#666",paddingRight:"10px"}}/> No Videos Found.</S.NoVideo>
 						: <S.Iframe
 							width="640" height="360"
-							src={`https://www.youtube.com/embed/${movie?.videos?.results[0].key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movie?.videos?.results[0].key}`}
-							title="YouTube video player"
-							frameBorder="0"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-							allowFullScreen>	
+							src={`https://www.youtube.com/embed/${movie?.videos?.results[0]?.key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movie?.videos?.results[0]?.key}`}
+							name="YouTube video player"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen;">	
 						</S.Iframe>
 						
 					}
