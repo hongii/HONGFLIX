@@ -6,10 +6,6 @@ import Footer from './components/Footer';
 import MainPage from './pages/MainPage/MainPage';
 import DetailPage from './pages/DetailPage/DetailPage';
 import SearchPage from './pages/SearchPage/SearchPage';
-//import Banner from './components/Banner';
-//import Row from './components/Row';
-//import requests from './api/requests';
-
 
 const Layout = () => {
   return (

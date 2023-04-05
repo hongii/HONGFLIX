@@ -22,7 +22,7 @@ interface Props {
 	isLargeRow?: boolean;
 }
 
-export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
+export default function Row({ title, id, fetchURL, isLargeRow}: Props) {
 	
 	let [movies, setMovies] = useState<Array<MovieResults>>([]);
 	let [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -63,30 +63,29 @@ export default function Row({ title, id, fetchURL,isLargeRow}: Props) {
 					0:{ slidesPerView: 3, slidesPerGroup: 3 },
 			}}>
 				
-				<div id={id} className='row__posters'>
-					{
-						movies.map((movie: MovieResults) => {
-							// console.log("back:  ",movie.backdrop_path);
-							// console.log("poster:  ",movie.poster_path); 
-							if ( movie.backdrop_path && movie.poster_path ) {
-								return (
-								<SwiperSlide key={movie.id} className='row__mySwiper'>
-									<img
-										className={`row__poster ${isLargeRow && "row__poster--large"}`}
-										src={`https://image.tmdb.org/t/p/original
-										${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
-										alt={movie.title}
-										onClick={() => { movieClickHandler(movie as MovieResults) }} />
-								</SwiperSlide>
-								)
-						}
-						else {
-							return;
-						}
-					})
+			{
+				movies.map((movie: MovieResults) => {
+					// console.log("back:  ",movie.backdrop_path);
+					// console.log("poster:  ",movie.poster_path); 
+					if ( movie.backdrop_path && movie.poster_path ) {
+						return (
+						<SwiperSlide key={movie.id} className='row__mySwiper'>
+							<img
+								className={`row__poster ${isLargeRow && "row__poster--large"}`}
+								src={`https://image.tmdb.org/t/p/original
+								${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+								alt={movie.title}
+								onClick={() => { movieClickHandler(movie as MovieResults) }} />
+						</SwiperSlide>
+						)
 					}
-				</div>
+					else {
+						return;
+					}
+				})
+			}
 			</Swiper>
+			
 			{
 				//cf. props로 전송할때 {...movieSelected}와 같이 스프레드 연산자를 이용해서도 전달 가능
 				modalOpen && <MovieModal movieSelected={movieSelected as MovieResults} setModalOpen={setModalOpen} />

@@ -8,6 +8,7 @@ export default function Footer() {
 			<S.FooterContent>
 				<S.FooterLinkContainer>
 					<S.FooterLinkTitle>넷플릭스 대한민국</S.FooterLinkTitle>
+					
 					<S.FooterLinkContent>
 						<S.FooterLink href="https://help.netflix.com/ko/">고객 센터</S.FooterLink>
 						<S.FooterLink href="https://help.netflix.com/legal/notices" >법적 고지</S.FooterLink>
@@ -18,6 +19,7 @@ export default function Footer() {
 						<S.FooterLink href="https://help.netflix.com/ko/legal/privacy">개인 정보</S.FooterLink>
 						<S.FooterLink href="https://help.netflix.com/ko/contactus">문의 하기</S.FooterLink>
 					</S.FooterLinkContent>
+					
 					<S.FooterDescContainer>
 						<S.FooterDescRights>
 							@Netflix RIGHTS RESERVED.
