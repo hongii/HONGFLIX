@@ -31,7 +31,7 @@ const Banner: React.FC = () => {
 			params: { append_to_response: "videos" }
 		});
 		
-		console.log(movieDetail);
+		// console.log(movieDetail);
 		// console.log(metaData);
 		setMovie(movieDetail);
 	}

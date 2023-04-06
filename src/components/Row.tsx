@@ -38,9 +38,23 @@ export default function Row({ title, id, fetchURL, isLargeRow}: Props) {
 		// console.log(request.data.results)
 	}
 
-	const movieClickHandler = (movie: MovieResults) => {
+	const fetchMovieVideo = async (movie: MovieResults) => { 
+		const { data: movieDetail } = await axios.get(`/movie/${movie.id}`, {
+			params: { append_to_response: "videos" }
+		});
+		console.log(movieDetail)
+		setMovieSelected(movieDetail);
+	}
+
+	const movieClickHandler = async (movie: MovieResults) => {
+		if (id !== "OG" && movie.media_type !== "tv"){
+			await fetchMovieVideo(movie)
+		}
+		else{
+			console.log(movie)
+			setMovieSelected(movie)
+		}
 		setModalOpen(true);
-		setMovieSelected(movie);
 	}
 	return (
 		<section className='row'>
@@ -88,7 +102,7 @@ export default function Row({ title, id, fetchURL, isLargeRow}: Props) {
 			
 			{
 				//cf. props로 전송할때 {...movieSelected}와 같이 스프레드 연산자를 이용해서도 전달 가능
-				modalOpen && <MovieModal movieSelected={movieSelected as MovieResults} setModalOpen={setModalOpen} />
+				modalOpen && <MovieModal rowID={id} movieSelected={movieSelected as MovieResults} setModalOpen={setModalOpen} />
 			}
 		</section>
 	)

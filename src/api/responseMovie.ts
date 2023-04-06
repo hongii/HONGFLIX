@@ -2,6 +2,7 @@ interface MovieResults {
 	title: string;
 	name?:string;
 	id: number;
+	media_type:string;
 	backdrop_path: string;
 	poster_path: string;
 	adult: boolean;
