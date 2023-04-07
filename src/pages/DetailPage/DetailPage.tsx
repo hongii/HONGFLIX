@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from '../../api/axios';
+import type { MovieResults } from '../../api/responseMovie';
 
 export default function DetailPage() {
 	let { movieId } = useParams();
-	let [movie, setMovie] = useState<any>({});
+	let [movie, setMovie] = useState<MovieResults | null>(null);
 	
 	useEffect(() => {
 		fetchData();
@@ -21,7 +22,7 @@ export default function DetailPage() {
 	else {
 		return (
 			<section>
-				<img	className='modal_poster-img'
+				<img	className='modal__poster--img'
 					src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
 				alt='poster image'/>
 			</section>

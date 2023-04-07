@@ -3,9 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 import { useDebounce } from '../../hooks/useDebounce';
 import './SearchPage.css';
+import { MovieResults } from '../../api/responseMovie';
 
 export default function SearchPage() {
-	const [searchResults, setSearchResults] = useState<any>([]);
+	const [searchResults, setSearchResults] = useState<Array<MovieResults>>([]);
 	const useQuery = () => {/* useLocation() 객체 정보 중 search부분의 정보를 가져온다. => search : "?q=아이언맨"*/
 		const decodeURL = decodeURI(useLocation().search);//한글 깨짐 방지
 		return new URLSearchParams(decodeURL);
@@ -13,7 +14,7 @@ export default function SearchPage() {
 	
 	let query = useQuery();/* ex) "http://localhost:3000/search?q=아이언맨" 이라면, 변수 query에는 "?q=아이언맨"이 들어간다.*/
 	let searchTerm = query.get("q"); /* searchTerm에는  q에 해당하는 값인 "아이언맨"이 저장된다. */
-	let debouncedSearchTerm = useDebounce(searchTerm, 500);//0.5초 동안 기다림
+	let debouncedSearchTerm = useDebounce(searchTerm as string, 500);//0.5초 동안 기다림
 	let navigate = useNavigate();
 
 	useEffect(() => {
