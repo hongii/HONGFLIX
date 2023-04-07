@@ -35,7 +35,7 @@ export default function Row({ title, id, fetchURL, isLargeRow}: Props) {
 	const fetchMovieData = async () => { 
 		const request = await axios.get(fetchURL);
 		setMovies(request.data.results);
-		// console.log(request.data.results)
+		console.log(request.data.results)
 	}
 
 	const fetchMovieVideo = async (movie: MovieResults) => { 

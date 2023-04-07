@@ -17,7 +17,7 @@ const HomeContainer = styled.div`
 const BackBtn = styled.button`
 	display: inline-block;
 	position: absolute;
-	top:1.5rem;
+	top:0.8rem;
 	left:0.5rem;
 	padding:0 0.5rem 0.5rem 0.5rem;
 	teat-align:center;
