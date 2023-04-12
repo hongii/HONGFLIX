@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import './MovieModal.css';
 import type { MovieResults } from '../../api/responseMovie';
@@ -7,7 +7,7 @@ import YouTube, { YouTubeProps } from 'react-youtube';
 interface Props {
 	movieSelected: MovieResults;
 	setModalOpen: (type: boolean) => void;
-	rowID: string;
+	rowID?: string;
 }
 
 export default function MovieModal({movieSelected, setModalOpen, rowID }: Props) {
@@ -19,14 +19,14 @@ export default function MovieModal({movieSelected, setModalOpen, rowID }: Props)
 	const [isVideoPlay, setVideoPlay] = useState<boolean>(true)
 
 	const onPlayerError: YouTubeProps['onError'] = (event) => {
-		console.log(event.data)
+		console.log("Error Number:",event.data)
     if (event.data == 2 || event.data == 5 || event.data == 100 || event.data == 101 || event.data == 150){
 			setVideoPlay(false)
 		}
   }
 
+	/* 자동 재생 기능(영상이 끝난 후, 다시 영상 재생) 구현 */
 	const onPlayerEnd: YouTubeProps['onEnd'] = (event) => {
-		//자동 재생 기능(영상이 끝난 후, 다시 영상 재생)
 		event.target.playVideo();
 	}	
 

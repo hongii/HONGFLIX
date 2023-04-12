@@ -5,11 +5,13 @@ import './Banner.css';
 import * as S from './BannerStyle';
 import { TbAlertCircle } from 'react-icons/tb'
 import type { MovieResults } from '../api/responseMovie';
+import MovieModal from './MovieModal/MovieModal';
 
 const Banner: React.FC = () => {
 	let [movie, setMovie] = useState<MovieResults | null>(null);
 	let [isPlayClicked, setPlayClicked] = useState<boolean>(false);
-	
+	let [modalOpen, setModalOpen] = useState<boolean>(false);
+
 	useEffect(() => {
 		fetchData();
 
@@ -50,7 +52,7 @@ const Banner: React.FC = () => {
 							<div style={{ marginRight: "10px" }}>▶</div>
 							<div>재생</div>
 						</button>
-						<button className='banner__button info'>
+						<button className='banner__button info' onClick={()=>{setModalOpen(true)}}>
 							<div style={{ marginRight: "10px" }}>ⓘ</div>
 							<div>상세정보</div>
 						</button>
@@ -59,6 +61,9 @@ const Banner: React.FC = () => {
 					<h1 className='banner__description'>{ movie?.overview}</h1>
 				</div>
 				<div className='banner__fadeBottom'></div>
+				{
+					modalOpen && <MovieModal movieSelected={movie as MovieResults} setModalOpen={setModalOpen} />
+				}
 			</header>
 		)
 	}

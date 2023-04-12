@@ -21,6 +21,7 @@ interface MovieResults {
 	original_language?: string;
 	first_air_date?: string;
 	original_name?: string;
+	key?: null;
 }
 
 interface VideosData{
