@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import './MovieModal.css';
 import type { MovieResults } from '../../api/responseMovie';
-import { Iframe } from '../BannerStyle';
+import YouTube, { YouTubeProps } from 'react-youtube';
 
 interface Props {
 	movieSelected: MovieResults;
@@ -16,11 +16,33 @@ export default function MovieModal({movieSelected, setModalOpen, rowID }: Props)
 										//=> Ref객체의 .current 값이 특정 DOM("modal"클래스를 가진 DOM)을 가리키게 된다.
 										//ex) console.log(ref.current) : <div class="modal">...</div>
 	useOnClickOutside({ref, setModalOpen});
+	const [isVideoPlay, setVideoPlay] = useState<boolean>(true)
+
+	const onPlayerError: YouTubeProps['onError'] = (event) => {
+		console.log(event.data)
+    if (event.data == 2 || event.data == 5 || event.data == 100 || event.data == 101 || event.data == 150){
+			setVideoPlay(false)
+		}
+  }
+
+	const onPlayerEnd: YouTubeProps['onEnd'] = (event) => {
+		//자동 재생 기능(영상이 끝난 후, 다시 영상 재생)
+		event.target.playVideo();
+	}	
+
+  const opts: YouTubeProps['opts'] = {
+    height: '450',
+		width: '100%',
+    playerVars: {
+      autoplay: 1,
+			mute: 0,
+			modestbranding: 1,
+			rel: 0,
+			loop: 1,
+    },
+  };
 
 	return (
-		/* movieSelected에서 가져올 정보 => backdrop_path, title, overview, 
-		name, release_date, first_air_date, vote_average */
-
 		<div className='presentation'>
 			<div className='wrapper-modal'>
 				{/* modal에 해당하는 DOM 객체(↓)에 ref속성값으로 위에서 만든 ref객체를 넣어준다. */}
@@ -28,17 +50,20 @@ export default function MovieModal({movieSelected, setModalOpen, rowID }: Props)
 					<span className='modal--close' onClick={() => { setModalOpen(false) }}>X</span>
 					
 					{
-						movieSelected.media_type === "tv" || movieSelected?.videos?.results.length === 0 || movieSelected?.videos === undefined || rowID === "OG" 
+						movieSelected.media_type === "tv" || movieSelected?.videos?.results.length === 0 || movieSelected?.videos === undefined || rowID === "OG"
 						? <img className='modal__poster--img'
-						src={`https://image.tmdb.org/t/p/original${movieSelected.backdrop_path}`}
-						alt='modal__poster--img' />
-						:<Iframe className='iframe'
-							height="450"
-							src={`https://www.youtube.com/embed/${movieSelected?.videos?.results[0].key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movieSelected?.videos?.results[0].key}`}
-							name="YouTube video player"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen;">	
-						</Iframe>
-						
+								src={`https://image.tmdb.org/t/p/original${movieSelected.backdrop_path}`}
+								alt='modal__poster--img' />
+						:
+							isVideoPlay
+							? <YouTube
+									videoId={movieSelected?.videos?.results[0]?.key}    
+									opts={opts}
+									onError={onPlayerError}
+									onEnd={onPlayerEnd}/>
+							: <img className='modal__poster--img'
+									src={`https://image.tmdb.org/t/p/original${movieSelected.backdrop_path}`}
+									alt='modal__poster--img' />
 					}
 
 					<div className='modal__content'>
