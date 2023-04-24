@@ -1,5 +1,4 @@
-.search-container {
-	background-color: black;
+.search__container {
 	width: 100%;
 	min-height: 64vh;
 	text-align: center;
@@ -22,19 +21,19 @@
 	padding-bottom: 7rem;
 }
 
-.movie_column-poster {
+.movie__column--poster {
 	cursor: pointer;
 	transition: transform ease-in 0.15s;
 	-webkit-transition: transform ease-in 0.15s;
 	overflow-x: none;
 }
 
-.movie_column-poster:hover {
+.movie__column--poster:hover {
 	transform: scale(1.2);
 	overflow-x: none;
 }
 
-.movie_poster {
+.movie__poster {
 	width: 90%;
 	border-radius: 5px;
 }

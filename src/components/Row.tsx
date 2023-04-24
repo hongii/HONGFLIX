@@ -35,14 +35,14 @@ export default function Row({ title, id, fetchURL, isLargeRow}: Props) {
 	const fetchMovieData = async () => { 
 		const request = await axios.get(fetchURL);
 		setMovies(request.data.results);
-		console.log(request.data.results)
+		// console.log(request.data.results)
 	}
 
 	const fetchMovieVideo = async (movie: MovieResults) => { 
 		const { data: movieDetail } = await axios.get(`/movie/${movie.id}`, {
 			params: { append_to_response: "videos" }
 		});
-		console.log(movieDetail)
+		// console.log(movieDetail)
 		setMovieSelected(movieDetail);
 	}
 
@@ -51,7 +51,7 @@ export default function Row({ title, id, fetchURL, isLargeRow}: Props) {
 			await fetchMovieVideo(movie)
 		}
 		else{
-			console.log(movie)
+			// console.log(movie)
 			setMovieSelected(movie)
 		}
 		setModalOpen(true);
