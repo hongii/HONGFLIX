@@ -40,12 +40,12 @@ export default function SearchPage() {
 			return (
 				<section className='search-container'>
 					{searchResults.map((movie: any) => {
-						if (movie.backdrop_path !== null && movie.media_type !== "person") {
+						if (movie.backdrop_path !== null && movie.media_type !== "person" && movie.media_type !== "tv") {
 							const movieImageURL = "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
 							return (
 								<div className='movie' key={movie.id}>
 									<div className='movie_column-poster'
-										onClick={() => { navigate(`/${movie.id}`) }}>
+										onClick={() => { console.log(movie);navigate(`/${movie.id}`) }}>
 										<img src={movieImageURL} alt="no movie image"
 											className="movie_poster" />
 									</div>
@@ -59,7 +59,7 @@ export default function SearchPage() {
 			
 		}
 		
-		/* 찾는 영화 정보가 있는 경우*/
+		/* 찾는 영화 정보가 없는 경우*/
 		else {
 			return(
 				<section className='no-results'>

@@ -42,7 +42,7 @@ export default function Nav() {
 			<div
 				style={{backgroundImage:"url('https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg')"}}
 				className="nav__logo"
-				onClick={() => {navigate("/") }}
+				onClick={() => {navigate("/");setClickSearch(false);setSearchValue("");}}
 			/>
 			
 			<div className='navSecondary'>
